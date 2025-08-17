@@ -1,9 +1,9 @@
 
-> **Se puede hacer de dos maneras**: con **`firewalld`** o directamente con **`nftables`**. **No se han de usar ambas a la vez porque se generarían conflictos.**. Diferencias clave:
->- Con `firewalld` es más granular y mantenible desde la CLI de firewall-cmd.
->- Con el archivo de `nftables` es más directo y minimalista y bloquea casi todo salvo lo explícitamente permitido.
->
->**Aquí se expondrá la primera, se expondrá cómo configurar `firewalld`**
+**Se puede hacer de dos maneras**: con **`firewalld`** o directamente con **`nftables`**. **No se han de usar ambas a la vez porque se generarían conflictos.**. Diferencias clave:
+- Con `firewalld` es más granular y mantenible desde la CLI de firewall-cmd.
+- Con el archivo de `nftables` es más directo y minimalista y bloquea casi todo salvo lo explícitamente permitido.
+
+**Aquí se expondrá la primera, se expondrá cómo configurar `firewalld`**
 
 ## Eliminamos servicios:
 
@@ -31,7 +31,20 @@ sudo dhclient -v -4
 sudo dhclient -v -6
 ```
 
+
 Usamos el bash [firewalld-conf.sh](./firewalld-conf.sh).
+
+Pasos a seguir:
+
+``` bash
+sudo firewall-cmd --permanent --set-default-zone=public
+sudo chmod +x ./firewalld-conf.sh
+sudo ./firewalld-conf.sh
+sudo firewall-cmd --reload
+
+# mostrar cambios realizados
+sudo firewall-cmd --zone=public --list-all
+```
 
 > `Cockpit` es una interfaz web de administración de sistemas Linux. Permite gestionar el servidor o PC desde un navegador, en el puerto 9090/TCP
 >
